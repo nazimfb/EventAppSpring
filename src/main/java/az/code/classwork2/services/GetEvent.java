@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class GetEvent {
-//    @RequestMapping(value="/")
-//    String
+    @RequestMapping(value="/")
+    public void doGet() {
+
+    }
 }
