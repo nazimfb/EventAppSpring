@@ -1,4 +1,4 @@
-package models;
+package az.code.classwork2.models;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
