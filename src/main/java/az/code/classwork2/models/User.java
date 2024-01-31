@@ -17,11 +17,16 @@ import java.util.List;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id")
     private Long userId;
+
     private String email;
+
+    @Column(name = "credit_card")
     private Long creditCard;
 
     @ManyToMany(mappedBy = "visitors", cascade = CascadeType.ALL)
+    @Column(name = "event_list")
     private List<Event> eventList;
 
     @OneToOne(cascade = CascadeType.ALL)

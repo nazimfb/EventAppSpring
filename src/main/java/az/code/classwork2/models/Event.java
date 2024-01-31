@@ -18,10 +18,19 @@ import java.util.List;
 public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false, name = "event_id")
     private Long eventId;
+
+    @Column(name = "event_name")
     private String eventName;
+
+    @Column(name = "date_time")
     private LocalDateTime dateTime;
+
+    @Column(name = "event_description")
     private String eventDescription;
+
+    @Column(nullable = false)
     private String location;
 
     @ElementCollection
