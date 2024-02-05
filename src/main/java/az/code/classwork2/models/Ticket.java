@@ -21,10 +21,8 @@ public class Ticket {
     private Double price;
 
     @ManyToOne
-    @Column(nullable = false)
     private User user;
 
     @OneToOne
-    @Column(nullable = false)
     private Event event;
 }

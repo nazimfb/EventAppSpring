@@ -26,7 +26,6 @@ public class User {
     private Long creditCard;
 
     @ManyToMany(mappedBy = "visitors", cascade = CascadeType.ALL)
-    @Column(name = "event_list")
     private List<Event> eventList;
 
     @OneToOne(cascade = CascadeType.ALL)
