@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/tickets")
 public class TicketController {
     TicketService ticketService;
+    // User registration for event - buying a ticket
     @PostMapping
     public ResponseEntity<Ticket> createTicket(@RequestBody TicketDto ticketDto) {
         Ticket ticketCreated = ticketService.create(ticketDto.toTicket());
         return new ResponseEntity<>(ticketCreated, HttpStatus.CREATED);
     }
+
 }

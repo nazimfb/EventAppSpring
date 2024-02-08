@@ -30,6 +30,11 @@ public class EventController {
         return new ResponseEntity<>(eventService.findAll(), HttpStatus.OK);
     }
 
+    @GetMapping("/upcoming")
+    public ResponseEntity<List<Event>> getUpcomingEvents() {
+        return new ResponseEntity<>(eventService.findAll(), HttpStatus.OK);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Optional<Event>> getEventById(@PathVariable("id") int id) {
         return new ResponseEntity<>(eventService.findById(id), HttpStatus.OK);
