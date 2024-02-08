@@ -1,8 +1,7 @@
 package az.code.classwork2.controllers;
 
-import az.code.classwork2.models.Event;
 import az.code.classwork2.models.Ticket;
-import az.code.classwork2.requests.EventDto;
+import az.code.classwork2.requests.TicketDto;
 import az.code.classwork2.services.TicketService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,8 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class TicketController {
     TicketService ticketService;
     @PostMapping
-    public ResponseEntity<Ticket> createTicket(@RequestBody EventDto eventDto) {
-        Event ticketCreated = ticketService.create(ticketRequests.toEvent());
+    public ResponseEntity<Ticket> createTicket(@RequestBody TicketDto ticketDto) {
+        Ticket ticketCreated = ticketService.create(ticketDto.toEvent());
         return new ResponseEntity<>(ticketCreated, HttpStatus.CREATED);
     }
 }
