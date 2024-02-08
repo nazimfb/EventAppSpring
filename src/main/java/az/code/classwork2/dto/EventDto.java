@@ -18,7 +18,7 @@ public record EventDto(String name,
         event.setEventDescription(desc);
         event.setLocation(location);
         event.setPrices(prices);
-        
+
         return event;
     }
 }
