@@ -1,7 +1,7 @@
 package az.code.classwork2.controllers;
 
 import az.code.classwork2.models.Ticket;
-import az.code.classwork2.requests.TicketDto;
+import az.code.classwork2.dto.TicketDto;
 import az.code.classwork2.services.TicketService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

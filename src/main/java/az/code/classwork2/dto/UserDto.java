@@ -1,4 +1,4 @@
-package az.code.classwork2.requests;
+package az.code.classwork2.dto;
 
 import az.code.classwork2.models.Event;
 import az.code.classwork2.models.Feedback;

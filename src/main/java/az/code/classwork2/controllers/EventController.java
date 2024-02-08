@@ -1,7 +1,7 @@
 package az.code.classwork2.controllers;
 
 import az.code.classwork2.models.Event;
-import az.code.classwork2.requests.EventDto;
+import az.code.classwork2.dto.EventDto;
 import az.code.classwork2.services.EventService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
