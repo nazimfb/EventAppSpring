@@ -1,5 +1,6 @@
 package az.code.classwork2.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -26,5 +27,6 @@ public class Feedback {
     private User user;
 
     @OneToOne(mappedBy = "feedback")
+    @JsonIgnoreProperties("feedback")
     private Event event;
 }

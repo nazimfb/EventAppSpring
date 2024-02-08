@@ -2,41 +2,47 @@ package az.code.classwork2.controllers;
 
 import az.code.classwork2.models.Event;
 import az.code.classwork2.dto.EventDto;
-import az.code.classwork2.services.EventService;
+import az.code.classwork2.services.EventServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/events")
 public class EventController {
-    public EventService eventService;
+    public EventServiceImpl eventServiceImpl;
 
-    public EventController(EventService eventService) {
-        this.eventService = eventService;
+    public EventController(EventServiceImpl eventServiceImpl) {
+        this.eventServiceImpl = eventServiceImpl;
     }
 
     @PostMapping
     public ResponseEntity<Event> createEvent(@RequestBody EventDto eventDto) {
-        Event eventCreated = eventService.create(eventDto.toEvent());
+        Event eventCreated = eventServiceImpl.create(eventDto.toEvent());
         return new ResponseEntity<>(eventCreated, HttpStatus.CREATED);
     }
 
     @GetMapping
     public ResponseEntity<List<Event>> getEvents() {
-        return new ResponseEntity<>(eventService.findAll(), HttpStatus.OK);
+        return new ResponseEntity<>(eventServiceImpl.findAll(), HttpStatus.OK);
     }
 
     @GetMapping("/upcoming")
     public ResponseEntity<List<Event>> getUpcomingEvents() {
-        return new ResponseEntity<>(eventService.findAll(), HttpStatus.OK);
+        LocalDateTime now = LocalDateTime.now();
+        List<Event> upcomingEvents = eventServiceImpl.findAll().stream()
+                .filter(event -> event.getDateTime() != null && event.getDateTime().isAfter(now))
+                .collect(Collectors.toList());
+        return new ResponseEntity<>(upcomingEvents, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Optional<Event>> getEventById(@PathVariable("id") int id) {
-        return new ResponseEntity<>(eventService.findById(id), HttpStatus.OK);
+        return new ResponseEntity<>(eventServiceImpl.findById(id), HttpStatus.OK);
     }
 }
