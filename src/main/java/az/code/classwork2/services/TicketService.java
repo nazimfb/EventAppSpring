@@ -2,7 +2,6 @@ package az.code.classwork2.services;
 
 import az.code.classwork2.models.Ticket;
 import az.code.classwork2.repositories.TicketRepo;
-import org.apache.catalina.Store;
 
 public class TicketService {
     private final TicketRepo ticketRepo;
