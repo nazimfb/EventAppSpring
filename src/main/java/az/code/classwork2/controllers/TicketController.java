@@ -16,7 +16,7 @@ public class TicketController {
     TicketService ticketService;
     @PostMapping
     public ResponseEntity<Ticket> createTicket(@RequestBody TicketDto ticketDto) {
-        Ticket ticketCreated = ticketService.create(ticketDto.toEvent());
+        Ticket ticketCreated = ticketService.create(ticketDto.toTicket());
         return new ResponseEntity<>(ticketCreated, HttpStatus.CREATED);
     }
 }

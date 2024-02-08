@@ -8,7 +8,7 @@ public record TicketDto(Long ticketId,
                         Double price,
                         User user,
                         Event event) {
-    public Ticket toEvent() {
+    public Ticket toTicket() {
         Ticket ticket = new Ticket();
 
         ticket.setTicketId(ticketId);
