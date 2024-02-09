@@ -42,5 +42,7 @@ public class Event {
     private List<User> visitors;
 
     @OneToOne
+    @JsonIgnore
+    @ToString.Exclude
     private Feedback feedback;
 }

@@ -3,19 +3,19 @@ package az.code.classwork2.controllers;
 import az.code.classwork2.models.Event;
 import az.code.classwork2.dto.EventDto;
 import az.code.classwork2.services.EventServiceImpl;
+import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/events")
 public class EventController {
     public EventServiceImpl eventServiceImpl;
+    public ModelMapper modelMapper = new ModelMapper();
 
     public EventController(EventServiceImpl eventServiceImpl) {
         this.eventServiceImpl = eventServiceImpl;
@@ -23,7 +23,7 @@ public class EventController {
 
     @PostMapping
     public ResponseEntity<Event> createEvent(@RequestBody EventDto eventDto) {
-        Event eventCreated = eventServiceImpl.create(eventDto.toEvent());
+        Event eventCreated = modelMapper.map(eventServiceImpl.create(eventDto.toEvent()), Event.class);
         return new ResponseEntity<>(eventCreated, HttpStatus.CREATED);
     }
 
