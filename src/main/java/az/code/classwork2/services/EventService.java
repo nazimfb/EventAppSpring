@@ -13,4 +13,6 @@ public interface EventService {
     Event update(Event eventToUpdate);
 
     void delete(int id);
+
+    List<Event> getUpcomingEvents();
 }

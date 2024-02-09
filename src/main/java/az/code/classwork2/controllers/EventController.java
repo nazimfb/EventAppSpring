@@ -34,11 +34,7 @@ public class EventController {
 
     @GetMapping("/upcoming")
     public ResponseEntity<List<Event>> getUpcomingEvents() {
-        LocalDateTime now = LocalDateTime.now();
-        List<Event> upcomingEvents = eventServiceImpl.findAll().stream()
-                .filter(event -> event.getDateTime() != null && event.getDateTime().isAfter(now))
-                .collect(Collectors.toList());
-        return new ResponseEntity<>(upcomingEvents, HttpStatus.OK);
+        return new ResponseEntity<>(eventServiceImpl.getUpcomingEvents(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")

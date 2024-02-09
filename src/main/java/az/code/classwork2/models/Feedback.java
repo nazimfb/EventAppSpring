@@ -1,11 +1,9 @@
 package az.code.classwork2.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @Data
@@ -24,9 +22,12 @@ public class Feedback {
     private int rating;
 
     @OneToOne(mappedBy = "feedback")
+    @ToString.Exclude
+    @JsonIgnore
     private User user;
 
     @OneToOne(mappedBy = "feedback")
-    @JsonIgnoreProperties("feedback")
+    @ToString.Exclude
+    @JsonIgnore
     private Event event;
 }

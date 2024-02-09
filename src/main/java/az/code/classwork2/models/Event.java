@@ -1,10 +1,8 @@
 package az.code.classwork2.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -34,9 +32,13 @@ public class Event {
     private String location;
 
     @ElementCollection
+    @JsonIgnore
+    @ToString.Exclude
     private List<Double> prices = new ArrayList<>();
 
     @ManyToMany(cascade = CascadeType.ALL)
+    @JsonIgnore
+    @ToString.Exclude
     private List<User> visitors;
 
     @OneToOne
