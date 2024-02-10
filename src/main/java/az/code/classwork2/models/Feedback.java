@@ -1,7 +1,6 @@
 package az.code.classwork2.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -10,6 +9,7 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "feedbacks")
 public class Feedback {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,7 +26,7 @@ public class Feedback {
     @JsonIgnore
     private User user;
 
-    @OneToOne(mappedBy = "feedback")
+    @ManyToOne
     @ToString.Exclude
     @JsonIgnore
     private Event event;

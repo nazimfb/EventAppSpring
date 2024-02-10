@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface FeedbackService {
     List<Feedback> getFeedbacksOfEvent(long eventId);
-    List<Feedback> getFeedbacksOfEventByUser(long userId);
+    List<Feedback> getFeedbacksOfEventByUser(long eventId, long userId);
 }

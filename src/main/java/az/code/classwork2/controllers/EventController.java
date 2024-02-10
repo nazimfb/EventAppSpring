@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/events")
@@ -22,19 +23,42 @@ public class EventController {
     }
 
     @PostMapping
-    public ResponseEntity<Event> createEvent(@RequestBody EventDto eventDto) {
-        Event eventCreated = modelMapper.map(eventServiceImpl.create(eventDto.toEvent()), Event.class);
+    public ResponseEntity<EventDto> createEvent(@RequestBody EventDto eventDto) {
+        EventDto eventCreated = modelMapper.map(toEventDto(eventServiceImpl.create(eventDto.toEvent())), EventDto.class);
         return new ResponseEntity<>(eventCreated, HttpStatus.CREATED);
     }
 
+    /*@PostMapping("{id}/register/{userId}")
+    public ResponseEntity<TicketDto> registerToEvent(@PathVariable long id, @PathVariable long userId) {
+        return null;
+    }*/
+
+    private EventDto toEventDto(Event event) {
+        return new EventDto(
+                event.getEventId(),
+                event.getEventName(),
+                event.getDateTime(),
+                event.getEventDescription(),
+                event.getPrices(),
+                event.getFeedbacks(),
+                event.getLocation());
+    }
+
     @GetMapping
-    public ResponseEntity<List<Event>> getEvents() {
-        return new ResponseEntity<>(eventServiceImpl.findAll(), HttpStatus.OK);
+    public ResponseEntity<List<EventDto>> getEvents() {
+        List<EventDto> eventDtoList = toEventDtoList(eventServiceImpl.findAll());
+        return new ResponseEntity<>(eventDtoList, HttpStatus.OK);
+    }
+
+    private List<EventDto> toEventDtoList(List<Event> all) {
+        return all.stream().map(
+                this::toEventDto
+        ).collect(Collectors.toList());
     }
 
     @GetMapping("/upcoming")
-    public ResponseEntity<List<Event>> getUpcomingEvents() {
-        return new ResponseEntity<>(eventServiceImpl.getUpcomingEvents(), HttpStatus.OK);
+    public ResponseEntity<List<EventDto>> getUpcomingEvents() {
+        return new ResponseEntity<>(toEventDtoList(eventServiceImpl.getUpcomingEvents()), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")

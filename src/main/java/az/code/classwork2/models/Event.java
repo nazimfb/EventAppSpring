@@ -13,6 +13,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "events")
 public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,8 +33,7 @@ public class Event {
     private String location;
 
     @ElementCollection
-    @JsonIgnore
-    @ToString.Exclude
+    @Column(nullable = false)
     private List<Double> prices = new ArrayList<>();
 
     @ManyToMany(cascade = CascadeType.ALL)
@@ -41,8 +41,8 @@ public class Event {
     @ToString.Exclude
     private List<User> visitors;
 
-    @OneToOne
+    @OneToMany
     @JsonIgnore
     @ToString.Exclude
-    private Feedback feedback;
+    private List<Feedback> feedbacks;
 }
