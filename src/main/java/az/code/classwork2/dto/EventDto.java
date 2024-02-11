@@ -12,7 +12,7 @@ public record EventDto(Long eventId,
                        @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
                        LocalDateTime localDateTime,
                        String desc,
-                       @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "0.#")
+                       @JsonFormat(shape = JsonFormat.Shape.NUMBER_FLOAT, pattern = "0.#")
                        List<Double> prices,
                        List<Feedback> feedbacks,
                        String location) {

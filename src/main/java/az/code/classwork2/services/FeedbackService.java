@@ -5,6 +5,7 @@ import az.code.classwork2.models.Feedback;
 import java.util.List;
 
 public interface FeedbackService {
-    List<Feedback> getFeedbacksOfEvent(long eventId);
+    Feedback create(Feedback feedback);
+    List<Feedback> getFeedbacksOfEvent(int eventId);
     List<Feedback> getFeedbacksOfEventByUser(long eventId, long userId);
 }

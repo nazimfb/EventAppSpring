@@ -23,6 +23,13 @@ public class Event {
     @Column(name = "event_name")
     private String eventName;
 
+    @Column(name = "is_active")
+    private boolean isActive;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn(name = "venue")
+    private VenueAttendance venueAttendance;
+
     @Column(name = "date_time")
     private LocalDateTime dateTime;
 
@@ -39,10 +46,9 @@ public class Event {
     @ManyToMany(cascade = CascadeType.ALL)
     @JsonIgnore
     @ToString.Exclude
-    private List<User> visitors;
+    private List<User> visitors; //users who bought tickets
 
-    @OneToMany
-    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL)
     @ToString.Exclude
     private List<Feedback> feedbacks;
 }

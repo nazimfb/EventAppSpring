@@ -31,6 +31,9 @@ public class User {
     @OneToOne(cascade = CascadeType.ALL)
     private Feedback feedback;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<VenueAttendance> venueAttendances;
+
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Ticket> tickets;
 }

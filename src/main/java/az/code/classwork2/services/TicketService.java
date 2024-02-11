@@ -1,16 +1,11 @@
 package az.code.classwork2.services;
 
 import az.code.classwork2.models.Ticket;
-import az.code.classwork2.repositories.TicketRepo;
 
-public class TicketService {
-    private final TicketRepo ticketRepo;
+import java.util.Optional;
 
-    public TicketService(TicketRepo ticketRepo) {
-        this.ticketRepo = ticketRepo;
-    }
-
-    public Ticket create(Ticket ticket) {
-        return ticketRepo.save(ticket);
-    }
+public interface TicketService {
+    Ticket create(Ticket ticket);
+    Optional<Ticket> purchaseTicket(long id, int cardNumber);
+    Optional<Ticket> findById(long id);
 }

@@ -11,19 +11,17 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "tickets")
-public class Ticket {
+public class VenueAttendance {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false, name = "ticket_id")
-    private Long ticketId;
+    private long id;
 
-    @Column(nullable = false)
-    private Double price;
+    @OneToOne(optional = false)
+    private Event event;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(optional = false)
     private User user;
 
-    @OneToOne
-    private Event event;
+    @Column(nullable = false)
+    private boolean attends;
 }

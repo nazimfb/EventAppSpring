@@ -1,9 +1,16 @@
 Classwork-2
+
 *****
 endpoints:
-1. http://localhost:8080/events/upcoming
-2. http://localhost:8080/events/{id}/register/{userId}
+1. http://localhost:8080/events/upcoming GET+
+2. http://localhost:8080/register POST -
+3. http://localhost:8080/events/{id} GET +
+4. http://localhost:8080/feedbacks POST +
+5. http://localhost:8080/check-in POST -
+6. http://localhost:8080/schedule/{eventId} GET -
+7. http://localhost:8080/tickets/{ticketId}/purchase POST +
 *****
+
 Event management system
 1.	As a user, I want to view a list of upcoming events, so that I can decide which events to attend.
 * Acceptance Criteria: Display a public page with upcoming events. Include essential details like event name, date, and location.

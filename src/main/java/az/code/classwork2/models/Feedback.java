@@ -26,7 +26,7 @@ public class Feedback {
     @JsonIgnore
     private User user;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @ToString.Exclude
     @JsonIgnore
     private Event event;

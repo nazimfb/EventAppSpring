@@ -24,24 +24,20 @@ public class EventController {
 
     @PostMapping
     public ResponseEntity<EventDto> createEvent(@RequestBody EventDto eventDto) {
-        EventDto eventCreated = modelMapper.map(toEventDto(eventServiceImpl.create(eventDto.toEvent())), EventDto.class);
+        EventDto eventCreated = modelMapper.map(toEventDto(Optional.of(eventServiceImpl.create(eventDto.toEvent()))), EventDto.class);
         return new ResponseEntity<>(eventCreated, HttpStatus.CREATED);
     }
 
-    /*@PostMapping("{id}/register/{userId}")
-    public ResponseEntity<TicketDto> registerToEvent(@PathVariable long id, @PathVariable long userId) {
-        return null;
-    }*/
+    private EventDto toEventDto(Optional<Event> event) {
+        return event.map(value -> new EventDto(
+                value.getEventId(),
+                value.getEventName(),
+                value.getDateTime(),
+                value.getEventDescription(),
+                value.getPrices(),
+                value.getFeedbacks(),
+                value.getLocation())).orElse(null);
 
-    private EventDto toEventDto(Event event) {
-        return new EventDto(
-                event.getEventId(),
-                event.getEventName(),
-                event.getDateTime(),
-                event.getEventDescription(),
-                event.getPrices(),
-                event.getFeedbacks(),
-                event.getLocation());
     }
 
     @GetMapping
@@ -51,9 +47,9 @@ public class EventController {
     }
 
     private List<EventDto> toEventDtoList(List<Event> all) {
-        return all.stream().map(
-                this::toEventDto
-        ).collect(Collectors.toList());
+        return all.stream().map(event ->
+                toEventDto(Optional.of(event)))
+                .collect(Collectors.toList());
     }
 
     @GetMapping("/upcoming")
@@ -62,7 +58,9 @@ public class EventController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<Event>> getEventById(@PathVariable("id") int id) {
-        return new ResponseEntity<>(eventServiceImpl.findById(id), HttpStatus.OK);
+    public ResponseEntity<Optional<EventDto>> getEventById(@PathVariable("id") int id) {
+        return eventServiceImpl.findById(id).isEmpty() ?
+                new ResponseEntity<>(HttpStatus.NOT_FOUND) :
+                new ResponseEntity<>(Optional.ofNullable( toEventDto(eventServiceImpl.findById(id)) ), HttpStatus.OK);
     }
 }
